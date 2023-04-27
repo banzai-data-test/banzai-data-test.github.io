@@ -8,6 +8,13 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Add custom CSS for animations -->
     <style>
+        body.light-mode .page-heading {
+             color: black;
+        }
+
+        body.dark-mode .page-heading {
+            color: white;
+        }
         body.light-mode {
             background-color: white;
             color: black;
@@ -67,7 +74,7 @@
         <div class="d-flex justify-content-end mt-2">
             <button class="btn btn-sm btn-outline-secondary" onclick="toggleDarkMode()">Toggle Dark Mode</button>
         </div>
-        <h1 class="mt-3 mb-4 text-center">Upload a CSV file</h1>
+        <h1 class="mt-3 mb-4 text-center page-heading">Upload a CSV file</h1>
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <form action="https://your-flask-app.herokuapp.com/upload_csv" method="POST" enctype="multipart/form-data">
