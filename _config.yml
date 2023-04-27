@@ -5,7 +5,7 @@ theme: jekyll-theme-minimal
 
 # Automated Data Pipeline with GitHub Pages CSV Upload
 
-This project demonstrates an end-to-end data pipeline that begins with uploading a CSV file through a GitHub Pages site, processes the data, and finally visualizes it using Metabase. The pipeline consists of the following steps:
+description: This project demonstrates an end-to-end data pipeline that begins with uploading a CSV file through a GitHub Pages site, processes the data, and finally visualizes it using Metabase. The pipeline consists of the following steps:
 
 1. Upload a CSV file to the GitHub Pages site.
 2. Ingest the CSV data using a Flask app running on Heroku, which processes and cleans the data.
