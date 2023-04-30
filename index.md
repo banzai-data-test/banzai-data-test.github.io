@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,59 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Add custom CSS for animations -->
     <style>
-        body.light-mode .page-heading {
-             color: black;
-        }
-
-        body.dark-mode .page-heading {
-            color: white;
-        }
-        body.light-mode {
-            background-color: white;
-            color: black;
-        }
-        
-        body.dark-mode {
-            background-color: #212529;
-            color: white;
-        }
-        
-        .file-input {
-            opacity: 0;
-            position: absolute;
-        }
-        
-        .file-label {
-            border: 2px solid #007bff;
-            border-radius: 4px;
-            color: #007bff;
-            cursor: pointer;
-            display: inline-block;
-            padding: 8px 12px;
-            transition: background-color 0.2s;
-        }
-        
-        .file-label:hover {
-            background-color: #007bff;
-            color: white;
-        }
-        
-        .submit-btn {
-            background-color: transparent;
-            border: 2px solid #007bff;
-            border-radius: 4px;
-            color: #007bff;
-            cursor: pointer;
-            display: inline-block;
-            margin-top: 16px;
-            padding: 8px 12px;
-            transition: background-color 0.2s;
-        }
-        
-        .submit-btn:hover {
-            background-color: #007bff;
-            color: white;
-        }
+        /* ... */
     </style>
     <!-- Add custom JavaScript for toggling light and dark mode -->
     <script>
@@ -71,19 +18,22 @@
 </head>
 <body class="light-mode">
     <div class="container">
-        <div class="d-flex justify-content-end mt-2">
-            <button class="btn btn-sm btn-outline-secondary" onclick="toggleDarkMode()">Toggle Dark Mode</button>
-        </div>
-        <h1 class="mt-3 mb-4 text-center page-heading">Upload a CSV file</h1>
+        <!-- ... -->
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <form action="https://your-flask-app.herokuapp.com/upload_csv" method="POST" enctype="multipart/form-data">
+                <form id="upload-form" action="https://your-flask-app.herokuapp.com/upload_csv" method="POST" enctype="multipart/form-data">
                     <div class="text-center">
                         <input type="file" class="file-input" name="file" id="file" accept=".csv">
                         <label for="file" class="file-label">Choose a CSV file</label>
                     </div>
                     <div class="text-center">
                         <button type="submit" class="submit-btn">Upload CSV</button>
+                    </div>
+                    <div id="upload-progress" class="mt-3" style="display:none;">
+                        <p class="text-center">Uploading...</p>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -94,5 +44,53 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <script>
+    // Add an event listener for form submission
+    document.getElementById('upload-form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the form from submitting normally
+        var form = event.target;
+        var formData = new FormData(form);
+        var xhr = new XMLHttpRequest();
+        xhr.open(form.method, form.action, true);
+
+        // Update the progress bar when the file is being uploaded
+        xhr.upload.addEventListener('progress', function(event) {
+            if (event.lengthComputable) {
+                var percentComplete = (event.loaded / event.total) * 100;
+                var progressBar = document.querySelector('.progress-bar');
+                progressBar.style.width = percentComplete + '%';
+                progressBar.setAttribute('aria-valuenow', percentComplete);
+            }
+        });
+
+        // Show the progress bar and reset it when the upload starts
+        xhr.upload.addEventListener('loadstart', function(event) {
+            var progressBar = document.querySelector('.progress-bar');
+            progressBar.style.width = '0%';
+            progressBar.setAttribute('aria-valuenow', 0);
+            document.getElementById('upload-progress').style.display = 'block';
+        });
+
+        // Handle the upload completion
+        xhr.addEventListener('load', function(event) {
+            if (xhr.status === 200) {
+                alert('File uploaded successfully');
+            } else {
+                alert('File upload failed: ' + xhr.statusText);
+            }
+            document.getElementById('upload-progress').style.display = 'none';
+        });
+
+        // Handle upload errors
+        xhr.addEventListener('error', function(event) {
+            alert('File upload failed');
+            document.getElementById('upload-progress').style.display = 'none';
+        });
+
+        // Send the form data
+        xhr.send(formData);
+    });
+</script>
 </body>
 </html>
