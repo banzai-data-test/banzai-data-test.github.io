@@ -1,4 +1,4 @@
-<html lang="en">
+    <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,12 +22,12 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <form id="upload-form" action="https://banzai-data-app.herokuapp.com/upload_csv" method="POST" enctype="multipart/form-data">
-                    <div class="text-center">
-                        <input type="file" class="file-input" name="file" id="file" accept=".csv,.xlsx">
+                    <div class="form-group">
+                        <input type="file" class="file-input form-control-file" name="file" id="file" accept=".csv,.xlsx">
                         <label for="file" class="file-label">Choose a CSV or XLSX file</label>
                     </div>
-                    <div class="text-center">
-                        <button type="submit" class="submit-btn">Upload CSV</button>
+                    <div class="form-group">
+                        <button type="submit" class="submit-btn btn btn-primary">Upload CSV</button>
                     </div>
                     <div id="upload-progress" class="mt-3" style="display:none;">
                         <p class="text-center">Uploading...</p>
