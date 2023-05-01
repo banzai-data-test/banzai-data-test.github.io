@@ -1,13 +1,28 @@
-    <html lang="en">
+
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CSV/XLSX Upload</title>
     <!-- Add Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Add custom CSS for animations -->
+    <!-- Add custom CSS -->
     <style>
-        /* ... */
+        body.dark-mode {
+            background-color: #343a40;
+            color: #fff;
+        }
+        .file-label {
+            display: inline-block;
+            padding: 6px 12px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 4px;
+        }
+        .file-label:hover {
+            background-color: #0056b3;
+        }
     </style>
     <!-- Add custom JavaScript for toggling light and dark mode -->
     <script>
@@ -18,12 +33,16 @@
 </head>
 <body class="light-mode">
     <div class="container">
-        <!-- ... -->
+        <div class="row mt-3">
+            <div class="col text-right">
+                <button class="btn btn-secondary" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+            </div>
+        </div>
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <form id="upload-form" action="https://banzai-data-app.herokuapp.com/upload_csv" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
-                        <input type="file" class="file-input form-control-file" name="file" id="file" accept=".csv,.xlsx">
+                        <input type="file" class="file-input form-control-file" name="file" id="file" accept=".csv,.xlsx" style="display:none;">
                         <label for="file" class="file-label">Choose a CSV or XLSX file</label>
                     </div>
                     <div class="form-group">
@@ -47,14 +66,13 @@
     
     <script>
     // Add an event listener for form submission
-    document.getElementById('upload-form').addEventListener('submit', function(event) {
+    document.getElementById('upload-form').addEventListener('submit', function (event) {
         event.preventDefault(); // Prevent the form from submitting normally
         var form = event.target;
         var formData = new FormData(form);
         var xhr = new XMLHttpRequest();
         xhr.open(form.method, form.action, true);
-
-        // Update the progress bar when the file is being uploaded
+      // Update the progress bar when the file is being uploaded
         xhr.upload.addEventListener('progress', function(event) {
             if (event.lengthComputable) {
                 var percentComplete = (event.loaded / event.total) * 100;
@@ -81,13 +99,35 @@
             }
             document.getElementById('upload-progress').style.display = 'none';
         });
+        
+        // Add this function to format the current date and time as a string
+        function getCurrentTimestamp() {
+            var now = new Date();
+            return now.toISOString().replace('T', ' ').split('.')[0];
+        }
 
         // Handle upload errors
-        xhr.addEventListener('error', function(event) {
-            alert('File upload failed');
+        xhr.addEventListener('error', function (event) {
+            var errorMessage = 'File upload failed at ' + getCurrentTimestamp() + '\nError details: ' + event.message + '\n';
+            alert('File upload failed. Check the logs for more details.');
+            saveLog(errorMessage);
             document.getElementById('upload-progress').style.display = 'none';
         });
+        
+        // Add this function to save the log message to a file in a "logs" folder
+        function saveLog(logMessage) {
+            // Create a Blob object containing the log message
+            var logBlob = new Blob([logMessage], { type: 'text/plain' });
 
+            // Create an anchor element to download the log file
+            var link = document.createElement('a');
+            link.href = URL.createObjectURL(logBlob);
+            link.download = 'logs/upload_error_' + getCurrentTimestamp().replace(/[: ]/g, '_') + '.log';
+
+            // Trigger the download and remove the anchor element
+            link.click();
+            link.remove();
+        } 
         // Send the form data
         xhr.send(formData);
     });
