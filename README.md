@@ -1,36 +1,24 @@
+# CSV Upload GitHub Page
 
+This is a simple GitHub Pages site that provides a user-friendly web interface for uploading CSV files. It is styled using Bootstrap, a popular CSS framework, and communicates with a separate Flask-based backend for processing the uploaded files.
 
-### Markdown
+## Features
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+- Upload CSV files through a user-friendly web interface
+- Progress bar to display the upload progress in real-time
+- Dark mode toggle to switch between light and dark themes
+- Responsive design that works on various devices and screen sizes
 
-```markdown
-Syntax highlighted code block
+## Usage
 
-# Header 1
-## Header 2
-### Header 3
+1. Visit the GitHub Pages site at https://yourusername.github.io/csv-upload-webapp/.
+2. Click the "Choose a CSV file" button to open a file picker dialog.
+3. Select a CSV file from your local machine.
+4. Click the "Upload CSV" button to start the file upload. The progress bar will indicate the upload progress.
+5. Once the upload is complete, you will see an alert indicating that the file was uploaded successfully.
 
-- Bulleted
-- List
+**Note**: The Flask backend application is hosted separately and is not part of this repository. Make sure to update the `action` attribute of the `form` element in the `index.html` file to point to your Flask application's `/upload_csv` endpoint.
 
-1. Numbered
-2. List
+## Customization
 
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Roadmap
-
-See the [open issues](https://github.com/evanca/quick-portfolio/issues) for a list of proposed features (and known issues).
-___
-
-### References
-
-[1] Jekyll theme "Minimal" for GitHub Pages: https://github.com/pages-themes/minimal (CC0 1.0 Universal License)
-<br>[2] Dummy photo via: https://pixabay.com/photos/man-male-adult-person-caucasian-1209494/ (Pixabay License)
-<br>[3] Dummy thumbnail image created by rawpixel.com: https://www.freepik.com/free-vector/set-elements-infographic_2807573.htm (Standard Freepik License)
+You can easily customize the appearance of this GitHub Pages site by modifying the CSS styles in the `index.html` file. Additionally, you can modify the JavaScript code for handling the upload process or adding new features. Simply edit the `index.html` file and push your changes to the `gh-pages` branch of your repository.
