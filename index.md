@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSV Upload</title>
+    <title>CSV/XLSX Upload</title>
     <!-- Add Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Add custom CSS for animations -->
@@ -21,10 +21,10 @@
         <!-- ... -->
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <form id="upload-form" action="https://your-flask-app.herokuapp.com/upload_csv" method="POST" enctype="multipart/form-data">
+                <form id="upload-form" action="https://banzai-data-app.herokuapp.com/upload_csv" method="POST" enctype="multipart/form-data">
                     <div class="text-center">
-                        <input type="file" class="file-input" name="file" id="file" accept=".csv">
-                        <label for="file" class="file-label">Choose a CSV file</label>
+                        <input type="file" class="file-input" name="file" id="file" accept=".csv,.xlsx">
+                        <label for="file" class="file-label">Choose a CSV or XLSX file</label>
                     </div>
                     <div class="text-center">
                         <button type="submit" class="submit-btn">Upload CSV</button>
