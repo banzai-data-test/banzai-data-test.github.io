@@ -23,6 +23,10 @@
         .file-label:hover {
             background-color: #0056b3;
         }
+        .row.mt-3 {
+            display: flex;
+            justify-content: flex-end;
+        }
     </style>
     <!-- Add custom JavaScript for toggling light and dark mode -->
     <script>
@@ -81,6 +85,12 @@
                 progressBar.setAttribute('aria-valuenow', percentComplete);
             }
         });
+        
+        document.getElementById('file').addEventListener('change', function () {
+            var fileName = this.files[0].name;
+            var fileLabel = document.querySelector('.file-label');
+            fileLabel.textContent = fileName || 'Choose a CSV or XLSX file';
+        });
 
         // Show the progress bar and reset it when the upload starts
         xhr.upload.addEventListener('loadstart', function(event) {
@@ -108,8 +118,8 @@
 
         // Handle upload errors
         xhr.addEventListener('error', function (event) {
-            var errorMessage = 'File upload failed at ' + getCurrentTimestamp() + '\nError details: ' + event.message + '\n';
-            alert('File upload failed. Check the logs for more details.');
+            var errorMessage = 'File upload failed at ' + getCurrentTimestamp() + '\nError details: ' + xhr.status + ' ' + xhr.statusText + '\n';
+            alert('File upload failed with status ' + xhr.status + ': ' + xhr.statusText + '. Check the logs for more details.');
             saveLog(errorMessage);
             document.getElementById('upload-progress').style.display = 'none';
         });
