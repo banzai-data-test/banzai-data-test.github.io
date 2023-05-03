@@ -1,4 +1,3 @@
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -27,6 +26,51 @@
             display: flex;
             justify-content: flex-end;
         }
+        .toggle-btn {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        .toggle-btn input {
+            display: none;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+        input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+        .slider.round {
+            border-radius: 34px;
+        }
+        .slider.round:before {
+            border-radius: 50%;
+        }
     </style>
     <!-- Add custom JavaScript for toggling light and dark mode -->
     <script>
@@ -39,7 +83,10 @@
     <div class="container">
         <div class="row mt-3">
             <div class="col text-right">
-                <button class="btn btn-secondary" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+                <label class="toggle-btn">
+                    <input type="checkbox" onclick="toggleDarkMode()">
+                    <span class="slider round"></span>
+                </label>
             </div>
         </div>
         <div class="row justify-content-center">
@@ -50,7 +97,7 @@
                         <label for="file" class="file-label">Choose a CSV or XLSX file</label>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="submit-btn btn btn-primary">Upload CSV</button>
+                           <button type="submit" class="submit-btn btn btn-primary">Upload CSV</button>
                     </div>
                     <div id="upload-progress" class="mt-3" style="display:none;">
                         <p class="text-center">Uploading...</p>
@@ -85,7 +132,7 @@
                 progressBar.setAttribute('aria-valuenow', percentComplete);
             }
         });
-        
+
         document.getElementById('file').addEventListener('change', function () {
             var fileName = this.files[0].name;
             var fileLabel = document.querySelector('.file-label');
@@ -115,7 +162,7 @@
             var now = new Date();
             return now.toISOString().replace('T', ' ').split('.')[0];
         }
-
+        
         // Handle upload errors
         xhr.addEventListener('error', function (event) {
             var errorMessage = 'File upload failed at ' + getCurrentTimestamp() + '\nError details: ' + xhr.status + ' ' + xhr.statusText + '\n';
@@ -137,10 +184,11 @@
             // Trigger the download and remove the anchor element
             link.click();
             link.remove();
-        } 
+        }
+
         // Send the form data
         xhr.send(formData);
     });
-</script>
+    </script>
 </body>
 </html>
