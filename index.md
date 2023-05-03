@@ -234,6 +234,15 @@
         </div>
     </div>
     
+     <!-- Add Metabase embed code -->
+    <iframe
+    src="{{iframeUrl}}"
+    frameborder="0"
+    width="800"
+    height="600"
+    allowtransparency
+    ></iframe>
+    
     <!-- Add Bootstrap JavaScript and its dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
@@ -379,6 +388,23 @@
             }, i * 50);
         }
     });
+    </script>
+    <script>
+    // you will need to install via 'npm install jsonwebtoken' or in your package.json
+
+    var jwt = require("jsonwebtoken");
+
+    var METABASE_SITE_URL = "https://banzai-test-app.metabaseapp.com";
+    var METABASE_SECRET_KEY = "b603c0423ff03eedf1fd9b076b02023e161b36f9ddd8826cdfbbd9319f69a2ca";
+
+    var payload = {
+      resource: { question: 1 },
+      params: {},
+      exp: Math.round(Date.now() / 1000) + (10 * 60) // 10 minute expiration
+    };
+    var token = jwt.sign(payload, METABASE_SECRET_KEY);
+
+    var iframeUrl = METABASE_SITE_URL + "/embed/question/" + token + "#bordered=true&titled=true";
     </script>
 </body>
 </html>
