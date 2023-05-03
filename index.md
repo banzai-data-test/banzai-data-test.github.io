@@ -160,7 +160,7 @@
         // Handle the upload completion
         xhr.addEventListener('load', function(event) {
             if (xhr.status === 200) {
-                var response = xhr.responseText;
+                var response = JSON.parse(xhr.responseText);
                 if (response.message === "File processed and saved to Google Sheets") {
                     alert('File uploaded successfully and processed.');
                 } else {
