@@ -7,6 +7,23 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Add custom CSS -->
     <style>
+        /* Add background animation CSS */
+        @keyframes gradientBackground {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        body {
+            background-image: linear-gradient(270deg, #00c9ff, #92fe9d, #00c9ff);
+            background-size: 600% 600%;
+            animation: gradientBackground 15s ease infinite;
+        }
         body.dark-mode {
             background-color: #343a40;
             color: #fff;
