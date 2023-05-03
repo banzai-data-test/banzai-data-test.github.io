@@ -114,8 +114,14 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>    
+    document.getElementById('file').addEventListener('change', function () {
+        var fileName = this.files[0].name;
+        var fileLabel = document.querySelector('.file-label');
+        fileLabel.textContent = fileName || 'Choose a CSV or XLSX file';
+    });
     
-    <script>
+
     // Add an event listener for form submission
     document.getElementById('upload-form').addEventListener('submit', function (event) {
         event.preventDefault(); // Prevent the form from submitting normally
@@ -123,7 +129,8 @@
         var formData = new FormData(form);
         var xhr = new XMLHttpRequest();
         xhr.open(form.method, form.action, true);
-      // Update the progress bar when the file is being uploaded
+
+        // Update the progress bar when the file is being uploaded
         xhr.upload.addEventListener('progress', function(event) {
             if (event.lengthComputable) {
                 var percentComplete = (event.loaded / event.total) * 100;
@@ -133,10 +140,13 @@
             }
         });
 
-        document.getElementById('file').addEventListener('change', function () {
-            var fileName = this.files[0].name;
-            var fileLabel = document.querySelector('.file-label');
-            fileLabel.textContent = fileName || 'Choose a CSV or XLSX file';
+        // Add event listener for file input change
+        xhr.upload.addEventListener('loadstart', function(event) {
+            document.getElementById('file').addEventListener('change', function () {
+                var fileName = this.files[0].name;
+                var fileLabel = document.querySelector('.file-label');
+                fileLabel.textContent = fileName || 'Choose a CSV or XLSX file';
+            });
         });
 
         // Show the progress bar and reset it when the upload starts
