@@ -3,7 +3,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <div id="glitch-title" class="text-center mt-3">
-        <span class="glitch-char">C</span><span class="glitch-char">S</span><span class="glitch-char">V</span><span class="glitch-char">/</span><span class="glitch-char">X</span><span class="glitch-char">L</span><span class="glitch-char">S</span><span class="glitch-char">X</span> <span class="glitch-char">U</span><span class="glitch-char">p</span><span class="glitch-char">l</span><span class="glitch-char">o</span><span class="glitch-char">a</span><span class="glitch-char">d</span>
+          <span class="glitch-char">A</span>
+          <span class="glitch-char">u</span>
+          <span class="glitch-char">t</span>
+          <span class="glitch-char">o</span>
+          <span class="glitch-char">m</span>
+          <span class="glitch-char">a</span>
+          <span class="glitch-char">t</span>
+          <span class="glitch-char">e</span>
+          <span class="glitch-char">d</span>
+          <span class="glitch-char">&nbsp;</span>
+          <span class="glitch-char">D</span>
+          <span class="glitch-char">a</span>
+          <span class="glitch-char">t</span>
+          <span class="glitch-char">a</span>
+          <span class="glitch-char">&nbsp;</span>
+          <span class="glitch-char">P</span>
+          <span class="glitch-char">i</span>
+          <span class="glitch-char">p</span>
+          <span class="glitch-char">e</span>
+          <span class="glitch-char">l</span>
+          <span class="glitch-char">i</span>
+          <span class="glitch-char">n</span>
+          <span class="glitch-char">e</span>
+          <span class="glitch-char">&nbsp;</span>
+          <span class="glitch-char">w</span>
+          <span class="glitch-char">i</span>
+          <span class="glitch-char">t</span>
+          <span class="glitch-char">h</span>
+          <span class="glitch-char">&nbsp;</span>
+          <span class="glitch-char">G</span>
+          <span class="glitch-char">i</span>
+          <span class="glitch-char">t</span>
+          <span class="glitch-char">H</span>
+          <span class="glitch-char">u</span>
+          <span class="glitch-char">b</span>
+          <span class="glitch-char">&nbsp;</span>
+          <span class="glitch-char">P</span>
+          <span class="glitch-char">a</span>
+          <span class="glitch-char">g</span>
+          <span class="glitch-char">e</span>
+          <span class="glitch-char">s</span>
+          <span class="glitch-char">&nbsp;</span>
+          <span class="glitch-char">C</span>
+          <span class="glitch-char">S</span>
+          <span class="glitch-char">V</span>
+          <span class="glitch-char">&nbsp;</span>
+          <span class="glitch-char">U</span>
+          <span class="glitch-char">p</span>
+          <span class="glitch-char">l</span>
+          <span class="glitch-char">o</span>
+          <span class="glitch-char">a</span>
+          <span class="glitch-char">d</span>
     </div>
     <!-- Add Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
