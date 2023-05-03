@@ -243,6 +243,30 @@
     allowtransparency
     ></iframe>
     
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col">
+          <h2>Project Description</h2>
+          <p>This project demonstrates an end-to-end data pipeline that begins with uploading a CSV file through a GitHub Pages site, processes the data, and finally visualizes it using Metabase. The pipeline consists of the following steps:</p>
+          <ol>
+            <li>Upload a CSV file to the GitHub Pages site.</li>
+            <li>Ingest the CSV data using a Flask app running on Heroku, which processes and cleans the data.</li>
+            <li>Load the processed data into Google Sheets.</li>
+            <li>Sync the data to Snowflake using Fivetran.</li>
+            <li>Transform the data using dbt.</li>
+            <li>Visualize the data with Metabase.</li>
+          </ol>
+          <p>The project utilizes a bash script to automate the integration of Flask, Docker, and Heroku, streamlining the deployment process and enabling a seamless data pipeline. By leveraging the power of these three components, the script provides the following key benefits for this use case:</p>
+          <ol>
+            <li><strong>Flask API Automation:</strong> The script sets up a Flask app to handle data processing and communication between the GitHub Pages site, Google Sheets, and the rest of the pipeline components, simplifying the steps required to create the necessary API endpoints.</li>
+            <li><strong>Docker Containerization Automation:</strong> The script automatically generates a Dockerfile that creates a containerized environment for the application, ensuring consistency, portability, and reproducibility across different stages. This eliminates manual installation of dependencies and simplifies deployment across platforms.</li>
+            <li><strong>Heroku Deployment Automation:</strong> The script takes care of deploying the containerized Flask app on Heroku, a platform-as-a-service (PaaS) that manages infrastructure and operations. This enables developers to focus on building features and functionality, without worrying about deployment details.</li>
+            <li><strong>GitHub Integration:</strong> The script automates the process of creating a new GitHub repository, initializing the repository with necessary files, and pushing the code. This allows for easy version control, collaboration, and showcasing of the project.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    
     <!-- Add Bootstrap JavaScript and its dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
