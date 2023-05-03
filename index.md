@@ -150,18 +150,17 @@
         // Handle the upload completion
         xhr.addEventListener('load', function(event) {
             if (xhr.status === 200) {
-                alert('File uploaded successfully');
+                var response = xhr.responseText;
+                if (response === "File processed and saved to Google Sheets") {
+                    alert('File uploaded successfully and processed.');
+                } else {
+                    alert('File uploaded successfully, but an error occurred during processing.');
+                }
             } else {
                 alert('File upload failed: ' + xhr.statusText);
             }
             document.getElementById('upload-progress').style.display = 'none';
         });
-        
-        // Add this function to format the current date and time as a string
-        function getCurrentTimestamp() {
-            var now = new Date();
-            return now.toISOString().replace('T', ' ').split('.')[0];
-        }
         
         // Handle upload errors
         xhr.addEventListener('error', function (event) {
