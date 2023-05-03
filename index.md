@@ -2,13 +2,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSV/XLSX Upload</title>
+    <div id="glitch-title" class="text-center mt-3">
+        <span class="glitch-char">C</span><span class="glitch-char">S</span><span class="glitch-char">V</span><span class="glitch-char">/</span><span class="glitch-char">X</span><span class="glitch-char">L</span><span class="glitch-char">S</span><span class="glitch-char">X</span> <span class="glitch-char">U</span><span class="glitch-char">p</span><span class="glitch-char">l</span><span class="glitch-char">o</span><span class="glitch-char">a</span><span class="glitch-char">d</span>
+    </div>
     <!-- Add Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Add custom CSS -->
     <style>
+
+                .glitch-char {
+            display: inline-block;
+            position: relative;
+            font-size: 1.5rem;
+            color: #fff;
+            cursor: default;
+            user-select: none;
+        }
+
+        .glitch-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 255, 255, 0.5);
+            clip-path: polygon(0 0, 100% 0, 100% 20%, 0 20%);
+            animation: glitch 1s infinite alternate;
+        }
+
+        @keyframes glitch {
+            0% {
+                clip-path: polygon(0 0, 100% 0, 100% 20%, 0 20%);
+            }
+            100% {
+                clip-path: polygon(0 100%, 100% 100%, 100% 80%, 0 80%);
+            }
+        }
         /* Add background animation CSS */
-        @keyframes gradientBackground {
+        @keyframes gradientBackgroundLight {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        @keyframes gradientBackgroundDark {
             0% {
                 background-position: 0% 50%;
             }
@@ -22,12 +64,26 @@
         body {
             background-image: linear-gradient(270deg, #00c9ff, #92fe9d, #00c9ff);
             background-size: 600% 600%;
-            animation: gradientBackground 15s ease infinite;
+            animation: gradientBackgroundLight 15s ease infinite;
         }
         body.dark-mode {
-            background-color: #343a40;
+            background-image: linear-gradient(270deg, #232526, #414345, #232526);
+            background-size: 600% 600%;
+            animation: gradientBackgroundDark 15s ease infinite;
             color: #fff;
         }
+        
+        .cursor-trail {
+            position: absolute;
+            font-family: monospace;
+            font-size: 12px;
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.1s ease-in-out;
+        }
+
         .file-label {
             display: inline-block;
             padding: 6px 12px;
@@ -215,6 +271,62 @@
 
         // Send the form data
         xhr.send(formData);
+    });
+    </script>
+    <script>
+    const glitchChars = document.querySelectorAll('.glitch-char');
+    const cursorProximity = 50; // Distance in pixels for triggering the glitch effect
+
+    function isCursorNearTitle(cursorX, cursorY) {
+        for (const glitchChar of glitchChars) {
+            const { left, top, right, bottom } = glitchChar.getBoundingClientRect();
+            const centerX = (left + right) / 2;
+            const centerY = (top + bottom) / 2;
+
+            if (
+                Math.abs(cursorX - centerX) < cursorProximity &&
+                Math.abs(cursorY - centerY) < cursorProximity
+            ) {
+                if (!glitchChar.querySelector('.glitch-effect')) {
+                    createGlitchEffect(glitchChar);
+                }
+            } else {
+                removeGlitchEffect(glitchChar);
+            }
+        }
+    }
+
+    function createGlitchEffect(glitchChar) {
+        const glitchEffect = document.createElement('span');
+        glitchEffect.classList.add('glitch-effect');
+        glitchChar.appendChild(glitchEffect);
+    }
+
+    function removeGlitchEffect(glitchChar) {
+        const glitchEffect = glitchChar.querySelector('.glitch-effect');
+        if (glitchEffect) {
+            glitchEffect.remove();
+        }
+    }
+
+    document.addEventListener('mousemove', event => {
+        const { clientX, clientY } = event;
+
+        // Check for title glitch effect
+        isCursorNearTitle(clientX, clientY);
+
+        // Data bits cursor trail effect
+        for (let i = 0; i < trails.length; i++) {
+            const trail = trails[i];
+            setTimeout(() => {
+                trail.style.opacity = 1;
+                trail.style.left = `${clientX}px`;
+                trail.style.top = `${clientY}px`;
+                setTimeout(() => {
+                    trail.style.opacity = 0;
+                }, 300);
+            }, i * 50);
+        }
     });
     </script>
 </body>
