@@ -236,7 +236,7 @@
     
      <!-- Add Metabase embed code -->
     <iframe
-    src="{{iframeUrl}}"
+    src="https://banzai-test-app.metabaseapp.com/public/dashboard/3c65661c-268d-4ae7-986c-28d69529b240"
     frameborder="0"
     width="800"
     height="600"
